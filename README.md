@@ -5,6 +5,7 @@ Enumerate AWS Assets
 python3 main.py google https
 
 # Example Output
+``` 
 [*] Scanning: https://example-assets.s3.amazonaws.com
 [+] 200 -- OK
 [*] Enumerating https://airbnb-assets.s3.amazonaws.com
@@ -28,3 +29,5 @@ ETag: "430496fa891378640caea0ce79c39c66"
 Key: _snapshot/test2
 Last Modified: 2022-03-15T15:39:58.000Z
 Size: 125
+```
+
