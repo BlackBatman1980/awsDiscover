@@ -2,13 +2,14 @@
 Enumerate AWS Assets
 
 # Example Usage
-python3 main.py google https
+python3 main.py example https
 
 # Example Output
 ``` 
+user@shell~$ python3 main.py example https
 [*] Scanning: https://example-assets.s3.amazonaws.com
 [+] 200 -- OK
-[*] Enumerating https://airbnb-assets.s3.amazonaws.com
+[*] Enumerating https://example-assets.s3.amazonaws.com
 
 Storage Class: STANDARD
 ETag: "2efab932913158f7c075cf9b58740676"
