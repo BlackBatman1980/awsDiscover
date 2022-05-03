@@ -2,8 +2,7 @@ import requests
 import sys
 from bs4 import BeautifulSoup
 
-
-found = []
+totalKeys = 0
 
 def generate(word):
   url = proto + "://"+ name + word
@@ -38,7 +37,10 @@ def scan():
       print(code)
 
     if code == 200:
-      found.append(url)
+      if "-assets.s3.amazonaws.com" in url:
+        print("[+] AWS Assets URL Returned 200")
+        enumURL(url)
+        exit()
       
     print("\n")
 
@@ -49,30 +51,29 @@ def writeOUT(data):
   file.write(data)
   file.close()
   
-def enumURL():
-  for url in found:
-    print("[*] Enumerating", url)
-    content = requests.get(url).content
+def enumURL(url):
+  print("[*] Enumerating", url)
+  content = requests.get(url).content
 
-    soup = BeautifulSoup(content, features='xml')
-    storageClass = soup.find_all('StorageClass')
-    Keys = soup.find_all('Key')
-    lastModified = soup.find_all('LastModified')
-    size = soup.find_all("Size")
-    ETag = soup.find_all("ETag")
+  soup = BeautifulSoup(content, features='xml')
+  storageClass = soup.find_all('StorageClass')
+  Keys = soup.find_all('Key')
+  lastModified = soup.find_all('LastModified')
+  size = soup.find_all("Size")
+  ETag = soup.find_all("ETag")
     
-    for i in range(0, len(storageClass)):
-      print("Storage Class: " + storageClass[i].get_text())
-      print("ETag: " + ETag[i].get_text())
-      print("Key: " + Keys[i].get_text())
-      print("Last Modified: " + lastModified[i].get_text())
-      print("Size: " + size[i].get_text())
-      print("\n")
+  for i in range(0, len(storageClass)):
+    print("Storage Class: " + storageClass[i].get_text())
+    print("ETag: " + ETag[i].get_text())
+    print("Key: " + Keys[i].get_text())
+    print("Last Modified: " + lastModified[i].get_text())
+    print("Size: " + size[i].get_text())
+    print("\n")
 
-      if OUT:
-        enumOut = {'Storage Class': storageClass[i].get_text(), 'ETag': ETag[i].get_text(), 'Key': Keys[i].get_text(), "lastModified": lastModified[i].get_text(), "Size": size[i].get_text()}
-        writeOUT(str(enumOut))
-        
+    if OUT:
+      enumOut = {"Website": url,'Storage Class': storageClass[i].get_text(), 'ETag': ETag[i].get_text(), 'Key': Keys[i].get_text(), "lastModified": lastModified[i].get_text(), "Size": size[i].get_text()}
+      writeOUT(str(enumOut))
+
+    print("[+] Done!")
     
 scan()
-enumURL()
