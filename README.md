@@ -1,22 +1,34 @@
-# Python on Replit
+# awsDiscover
+Enumerate AWS Assets
 
-This is a template to get you started with Python on Replit. It's ready to go so you can just hit run and start coding!
+# Example Usage
+python3 main.py example https
 
-## Running the repl
+# Example Output
+``` 
+user@shell~$ python3 main.py example https
+[*] Scanning: https://example-assets.s3.amazonaws.com
+[+] 200 -- OK
+[*] Enumerating https://example-assets.s3.amazonaws.com
 
-Simply hit run! You can edit the run command from the `.replit` file.
+Storage Class: STANDARD
+ETag: "2efab932913158f7c075cf9b58740676"
+Key: alitaPoster.jpg
+Last Modified: 2019-03-28T17:07:53.000Z
+Size: 80705
 
-## Installing packages
 
-To add packages to your repl, you can just import directly in the file you want to use the package in, and it will automatically be installed when you press the run button. Like below:
-```python
-import math
-import pandas as pd
-from flask import Flask
+Storage Class: STANDARD
+ETag: "a4f010401a23da159ef604ea9247ea13"
+Key: _snapshot/test
+Last Modified: 2022-03-15T15:39:51.000Z
+Size: 107
+
+
+Storage Class: STANDARD
+ETag: "430496fa891378640caea0ce79c39c66"
+Key: _snapshot/test2
+Last Modified: 2022-03-15T15:39:58.000Z
+Size: 125
 ```
 
-You could also install packages by using the Replit packager interface in the left sidebar.
-
-## Help
-
-If you need help you might be able to find an answer on our [docs](https://docs.replit.com) page. Feel free to report bugs and give us feedback [here](https://replit.com/support).
