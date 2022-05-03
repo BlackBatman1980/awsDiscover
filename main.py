@@ -15,11 +15,6 @@ except:
   print(f"[!] Please add website name and/or protocol\nEg. python3 {__file__} somewebsite http")
   exit(1)
 
-try:
-  outFile = sys.argv[3]
-  OUT = True
-except:
-  OUT = False
   
 wordlist = ["-assets.s3.amazonaws.com","-www.s3.amazonaws.com","-public.s3.amazonaws.com","-private.s3.amazonaws.com"]
 
@@ -28,7 +23,7 @@ statusCodes = {403: "403 -- Forbidden", 404: "[x] 404 -- Not Found", 500: "500 -
 def scan():
   for i in wordlist:
     url = generate(i)
-    print("[+] Scanning:", url)
+    print("[*] Scanning:", url)
     r = requests.get(url)
     code = r.status_code
     try:
@@ -38,18 +33,11 @@ def scan():
 
     if code == 200:
       if "-assets.s3.amazonaws.com" in url:
-        print("[+] AWS Assets URL Returned 200")
+        print("\n")
         enumURL(url)
         exit()
       
     print("\n")
-
-
-def writeOUT(data):
-  print("[*] Writing Out To File")
-  file = open(outFile, "a")
-  file.write(data)
-  file.close()
   
 def enumURL(url):
   print("[*] Enumerating", url)
@@ -70,10 +58,5 @@ def enumURL(url):
     print("Size: " + size[i].get_text())
     print("\n")
 
-    if OUT:
-      enumOut = {"Website": url,'Storage Class': storageClass[i].get_text(), 'ETag': ETag[i].get_text(), 'Key': Keys[i].get_text(), "lastModified": lastModified[i].get_text(), "Size": size[i].get_text()}
-      writeOUT(str(enumOut))
-
-    print("[+] Done!")
-    
+  print("Done!")  
 scan()
