@@ -30,5 +30,14 @@ ETag: "430496fa891378640caea0ce79c39c66"
 Key: _snapshot/test2
 Last Modified: 2022-03-15T15:39:58.000Z
 Size: 125
+
+
+Storage Class: STANDARD
+ETag: "cf831895a92cd9da09baca42f98cb142"
+Key: writeable_bucket.txt
+Last Modified: 2021-06-14T14:49:35.000Z
+Size: 35
+
+Done!
 ```
 
